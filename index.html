@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+
+<html lang="vi">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Locket Gold ✨</title>
+
+<style>
+
+* {
+
+    box-sizing: border-box;
+
+    margin: 0;
+
+    padding: 0;
+
+}
+
+body {
+
+    font-family: -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+
+    background: #090909;
+
+    color: white;
+
+    line-height: 1.6;
+
+}
+
+header {
+
+    padding: 20px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    border-bottom: 1px solid #292929;
+
+}
+
+.logo {
+
+    font-size: 23px;
+
+    font-weight: bold;
+
+    color: #ffd66b;
+
+}
+
+.logo span {
+
+    color: white;
+
+}
+
+nav a {
+
+    color: white;
+
+    text-decoration: none;
+
+    margin-left: 12px;
+
+    font-size: 13px;
+
+}
+
+.hero {
+
+    text-align: center;
+
+    padding: 65px 20px 45px;
+
+    background: radial-gradient(
+
+        circle at top,
+
+        #45351a 0%,
+
+        #17130c 35%,
+
+        #090909 75%
+
+    );
+
+}
+
+.badge {
+
+    display: inline-block;
+
+    border: 1px solid #c8a34b;
+
+    color: #ffd66b;
+
+    padding: 6px 14px;
+
+    border-radius: 30px;
+
+    font-size: 12px;
+
+    margin-bottom: 20px;
+
+}
+
+.hero h1 {
+
+    font-size: clamp(32px, 8vw, 48px);
+
+    line-height: 1.2;
+
+    margin-bottom: 18px;
+
+}
+
+.gold {
+
+    color: #ffd66b;
+
+}
+
+.hero p {
+
+    color: #bcbcbc;
+
+    max-width: 440px;
+
+    margin: 0 auto 25px;
+
+    font-size: 15px;
+
+}
+
+.button {
+
+    display: inline-block;
+
+    background: linear-gradient(135deg, #ffe8a0, #c89a35);
+
+    color: #171006;
+
+    padding: 13px 25px;
+
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    border: none;
+
+    cursor: pointer;
+
+}
+
+section {
+
+    padding: 45px 18px;
+
+    max-width: 1050px;
+
+    margin: auto;
+
+}
+
+.section-title {
+
+    text-align: center;
+
+    font-size: 28px;
+
+    margin-bottom: 12px;
+
+}
+
+.section-desc {
+
+    text-align: center;
+
+    color: #999;
+
+    margin-bottom: 30px;
+
+    font-size: 14px;
+
+}
+
+.features {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 12px;
+
+}
+
+.feature {
+
+    background: #151515;
+
+    border: 1px solid #292929;
+
+    padding: 16px 12px;
+
+    border-radius: 14px;
+
+    font-size: 13px;
+
+}
+
+.feature strong {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #ffdc83;
+
+    font-size: 14px;
+
+}
+
+.plans {
+
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+
+    max-width: 430px;
+
+    margin: auto;
+
+}
+
+.plan {
+
+    background: #141414;
+
+    border: 1px solid #363026;
+
+    border-radius: 20px;
+
+    padding: 25px 22px;
+
+    position: relative;
+
+}
+
+.plan.popular {
+
+    border: 2px solid #d9b04f;
+
+    background: linear-gradient(145deg, #292113, #141414 60%);
+
+}
+
+.popular-label {
+
+    display: inline-block;
+
+    background: #d9b04f;
+
+    color: #171006;
+
+    border-radius: 20px;
+
+    padding: 4px 10px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    margin-bottom: 12px;
+
+}
+
+.plan h3 {
+
+    font-size: 21px;
+
+    margin-bottom: 5px;
+
+}
+
+.plan .description {
+
+    color: #999;
+
+    font-size: 13px;
+
+}
+
+.price {
+
+    font-size: 30px;
+
+    color: #ffdc83;
+
+    font-weight: bold;
+
+    margin: 15px 0;
+
+}
+
+.price small {
+
+    font-size: 13px;
+
+    color: #aaa;
+
+    font-weight: normal;
+
+}
+
+.plan ul {
+
+    list-style: none;
+
+    margin: 20px 0;
+
+}
+
+.plan li {
+
+    margin: 10px 0;
+
+    font-size: 14px;
+
+    color: #ddd;
+
+}
+
+.plan li::before {
+
+    content: "✓ ";
+
+    color: #f4cd69;
+
+    font-weight: bold;
+
+}
+
+.plan .button {
+
+    display: block;
+
+    text-align: center;
+
+    width: 100%;
+
+}
+
+.note {
+
+    color: #999;
+
+    font-size: 12px;
+
+    text-align: center;
+
+    margin-top: 25px;
+
+}
+
+footer {
+
+    border-top: 1px solid #292929;
+
+    padding: 25px 18px;
+
+    text-align: center;
+
+    color: #888;
+
+    font-size: 12px;
+
+}
+
+footer a {
+
+    color: #ffdc83;
+
+}
+
+@media (min-width: 700px) {
+
+    .features {
+
+        grid-template-columns: repeat(4, 1fr);
+
+    }
+
+    .plans {
+
+        grid-template-columns: repeat(3, 1fr);
+
+        max-width: 950px;
+
+        align-items: stretch;
+
+    }
+
+    .hero {
+
+        padding: 90px 20px 70px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">✦ LOCKET <span>GOLD</span></div>
+
+    <nav>
+
+        <a href="#features">Tính năng</a>
+
+        <a href="#plans">Gói dịch vụ</a>
+
+    </nav>
+
+</header>
+
+<main>
+
+    <div class="hero">
+
+        <div class="badge">✦ KHÁM PHÁ LOCKET GOLD</div>
+
+        <h1>
+
+            Your Moments,<br>
+
+            <span class="gold">Your Gold Experience.</span>
+
+        </h1>
+
+        <p>
+
+            Khám phá các tính năng nổi bật và tìm hiểu
+
+            về trải nghiệm Locket Gold.
+
+        </p>
+
+        <a href="#plans" class="button">
+
+            Khám phá các gói ✨
+
+        </a>
+
+    </div>
+
+    <section id="features">
+
+        <h2 class="section-title">
+
+            Tính năng nổi bật
+
+        </h2>
+
+        <p class="section-desc">
+
+            Những tính năng bạn có thể khám phá với Locket Gold.
+
+        </p>
+
+        <div class="features">
+
+            <div class="feature">
+
+                <strong>💛 Gold Experience</strong>
+
+                Tìm hiểu trải nghiệm Gold.
+
+            </div>
+
+            <div class="feature">
+
+                <strong>🚫 Không quảng cáo</strong>
+
+                Tìm hiểu tùy chọn trải nghiệm không quảng cáo.
+
+            </div>
+
+            <div class="feature">
+
+                <strong>🖼️ Ảnh thư viện</strong>
+
+                Khám phá tính năng chia sẻ ảnh.
+
+            </div>
+
+            <div class="feature">
+
+                <strong>🎥 Video 60 giây</strong>
+
+                Tìm hiểu các tùy chọn video.
+
+            </div>
+
+            <div class="feature">
+
+                <strong>👀 Lượt xem</strong>
+
+                Khám phá thông tin lượt xem Lockets.
+
+            </div>
+
+            <div class="feature">
+
+                <strong>🎨 Icon Locket</strong>
+
+                Tìm hiểu tùy chọn cá nhân hóa.
+
+            </div>
+
+            <div class="feature">
+
+                <strong>👥 Bạn bè</strong>
+
+                Khám phá các tùy chọn kết nối.
+
+            </div>
+
+            <div class="feature">
+
+                <strong>🏅 Gold Badge</strong>
+
+                Tìm hiểu về huy hiệu Gold.
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section id="plans">
+
+        <h2 class="section-title">
+
+            Các gói tham khảo
+
+        </h2>
+
+        <p class="section-desc">
+
+            Giá dưới đây chỉ là minh họa giao diện.
+
+        </p>
+
+        <div class="plans">
+
+            <div class="plan">
+
+                <h3>Basic</h3>
+
+                <p class="description">
+
+                    Gói tham khảo cơ bản
+
+                </p>
+
+                <div class="price">
+
+                    19.000đ
+
+                    <small>/ tháng</small>
+
+                </div>
+
+                <ul>
+
+                    <li>Thông tin tính năng Gold</li>
+
+                    <li>Giao diện thân thiện</li>
+
+                    <li>Hướng dẫn sử dụng</li>
+
+                    <li>Tham khảo các tùy chọn</li>
+
+                </ul>
+
+                <button class="button"
+
+                    onclick="choosePlan('Basic')">
+
+                    Tìm hiểu thêm
+
+                </button>
+
+            </div>
+
+            <div class="plan popular">
+
+                <span class="popular-label">
+
+                    ✨ ĐƯỢC QUAN TÂM
+
+                </span>
+
+                <h3>Gold</h3>
+
+                <p class="description">
+
+                    Gói tham khảo nổi bật
+
+                </p>
+
+                <div class="price">
+
+                    39.000đ
+
+                    <small>/ tháng</small>
+
+                </div>
+
+                <ul>
+
+                    <li>Tìm hiểu trải nghiệm Gold</li>
+
+                    <li>Khám phá tính năng nổi bật</li>
+
+                    <li>Thông tin cá nhân hóa</li>
+
+                    <li>Hướng dẫn sử dụng</li>
+
+                </ul>
+
+                <button class="button"
+
+                    onclick="choosePlan('Gold')">
+
+                    Tìm hiểu thêm
+
+                </button>
+
+            </div>
+
+            <div class="plan">
+
+                <h3>Premium</h3>
+
+                <p class="description">
+
+                    Gói tham khảo dài hạn
+
+                </p>
+
+                <div class="price">
+
+                    99.000đ
+
+                    <small>/ 3 tháng</small>
+
+                </div>
+
+                <ul>
+
+                    <li>Thông tin các tính năng</li>
+
+                    <li>Hướng dẫn cá nhân hóa</li>
+
+                    <li>Khám phá trải nghiệm Gold</li>
+
+                    <li>Tham khảo các tùy chọn</li>
+
+                </ul>
+
+                <button class="button"
+
+                    onclick="choosePlan('Premium')">
+
+                    Tìm hiểu thêm
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <p class="note">
+
+            Giá và gói trên chỉ để minh họa thiết kế.
+
+            Website chưa bán hàng và chưa xử lý thanh toán.
+
+        </p>
+
+    </section>
+
+</main>
+
+<footer>
+
+    <p>✦ Locket Gold — Fan information page</p>
+
+    <p style="margin-top:8px">
+
+        Đây là website độc lập, không liên kết hoặc
+
+        được bảo trợ bởi Locket.
+
+    </p>
+
+    <p style="margin-top:8px">
+
+        Muốn đăng ký dịch vụ thật, hãy sử dụng
+
+        ứng dụng Locket chính thức.
+
+    </p>
+
+</footer>
+
+<script>
+
+function choosePlan(plan) {
+
+    alert(
+
+        "Bạn đã chọn gói " + plan +
+
+        ". Đây là trang demo, chưa có chức năng thanh toán."
+
+    );
+
+}
+
+</script>
+
+</body>
+
+</html>
