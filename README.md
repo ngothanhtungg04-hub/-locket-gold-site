@@ -26,5 +26,5 @@ Chưa có link công khai cho tới khi hoàn tất triển khai trên tài kho�
 
 ## Thông tin đã cập nhật
 - Giá gói: tháng 79.000đ, năm 139.000đ, vĩnh viễn 199.000đ.
-- Liên hệ: Zalo 0888628744, Facebook và TikTok theo các liên kết trong trang.
+- Liên hệ: Zalo 0888628733, Facebook và TikTok theo các liên kết trong trang.
 - Mã QR Vietcombank được lưu tại `payment-qr.jpeg`. Kiểm tra kỹ thông tin tài khoản và người nhận trước khi công khai website.
