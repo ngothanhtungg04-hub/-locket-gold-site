@@ -1,16 +1,672 @@
-<!doctype html>
-<html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f36fa4"><title>Locket Gold — Chọn gói của bạn</title><meta name="description" content="Website độc lập giới thiệu các gói Locket Gold."><link rel="stylesheet" href="style.css"></head>
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Tối ưu giao diện trên điện thoại -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#080808">
+
+    <title>Hệ Thống Kích Hoạt Tự Động</title>
+
+    <style>
+        /* =========================
+           1. THIẾT LẬP GIAO DIỆN CHUNG
+        ========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #d4af37;
+            --gold-light: #ffe69a;
+            --black: #080808;
+            --card: #121212;
+            --text: #f5f5f5;
+            --muted: #999999;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont,
+                "Segoe UI", Roboto, Arial, sans-serif;
+            background:
+                radial-gradient(
+                    circle at top,
+                    rgba(212, 175, 55, 0.09),
+                    transparent 45%
+                ),
+                var(--black);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px 16px;
+        }
+
+        button,
+        input {
+            font: inherit;
+        }
+
+        /* =========================
+           2. KHUNG NỘI DUNG CHÍNH
+        ========================= */
+        .container {
+            width: 100%;
+            max-width: 430px;
+            margin: auto;
+        }
+
+        .logo {
+            width: 64px;
+            height: 64px;
+            border: 1px solid var(--gold);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            color: var(--gold);
+            font-size: 27px;
+            font-weight: 800;
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.12);
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .heading h1 {
+            font-size: clamp(21px, 5vw, 27px);
+            line-height: 1.4;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: var(--gold-light);
+            text-shadow: 0 0 18px rgba(212, 175, 55, 0.2);
+        }
+
+        .heading p {
+            margin-top: 10px;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* =========================
+           3. THẺ NHẬP LIỆU
+        ========================= */
+        .card {
+            background: linear-gradient(
+                145deg,
+                #171717,
+                #0d0d0d
+            );
+            border: 1px solid rgba(212, 175, 55, 0.22);
+            border-radius: 22px;
+            padding: 25px 20px;
+            box-shadow: 0 18px 55px rgba(0, 0, 0, 0.4);
+        }
+
+        .field-label {
+            display: block;
+            margin-bottom: 12px;
+            color: #e5e5e5;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .input-field {
+            width: 100%;
+            height: 54px;
+            padding: 0 15px;
+            border: 1px solid #333333;
+            border-radius: 12px;
+            background: #090909;
+            color: #ffffff;
+            outline: none;
+            transition: border-color 0.25s, box-shadow 0.25s;
+        }
+
+        .input-field::placeholder {
+            color: #777777;
+            font-size: 13px;
+        }
+
+        .input-field:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        /* =========================
+           4. NÚT KÍCH HOẠT
+        ========================= */
+        .activate-button {
+            width: 100%;
+            min-height: 54px;
+            margin-top: 20px;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(
+                135deg,
+                #f5df91,
+                #d4af37 55%,
+                #b68a18
+            );
+            color: #151007;
+            font-size: 15px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.12);
+            transition:
+                transform 0.2s,
+                box-shadow 0.2s,
+                opacity 0.2s;
+        }
+
+        .activate-button:hover {
+            box-shadow: 0 0 25px rgba(212, 175, 55, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .activate-button:active {
+            transform: scale(0.98);
+        }
+
+        .activate-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .secure-note {
+            margin-top: 17px;
+            text-align: center;
+            font-size: 12px;
+            line-height: 1.6;
+            color: #858585;
+        }
+
+        /* =========================
+           5. KHU VỰC KẾT QUẢ
+           Mặc định được ẩn đi
+        ========================= */
+        .result-section {
+            display: none;
+            margin-top: 22px;
+            animation: fadeIn 0.45s ease;
+        }
+
+        .result-section.visible {
+            display: block;
+        }
+
+        .result-title {
+            text-align: center;
+            color: var(--gold-light);
+            font-size: 19px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .qr-box {
+            width: 100%;
+            max-width: 260px;
+            min-height: 220px;
+            margin: 0 auto 20px;
+            padding: 15px;
+            border-radius: 16px;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-image {
+            display: block;
+            width: 100%;
+            max-width: 230px;
+            height: auto;
+            object-fit: contain;
+        }
+
+        .qr-placeholder {
+            color: #555555;
+            font-size: 13px;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        .instruction {
+            color: #c7c7c7;
+            font-size: 14px;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .status-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 14px 10px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            background: rgba(212, 175, 55, 0.05);
+            border-radius: 12px;
+            color: var(--gold-light);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        /* Vòng xoay loading */
+        .spinner {
+            width: 17px;
+            height: 17px;
+            flex-shrink: 0;
+            border: 2px solid rgba(212, 175, 55, 0.25);
+            border-top-color: var(--gold);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        /* Thông báo lỗi */
+        .error-message {
+            display: none;
+            margin-top: 15px;
+            color: #ff7777;
+            font-size: 13px;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .error-message.visible {
+            display: block;
+        }
+
+        /* =========================
+           6. CHÂN TRANG
+        ========================= */
+        .footer {
+            margin-top: 25px;
+            text-align: center;
+            color: #666666;
+            font-size: 11px;
+            line-height: 1.8;
+        }
+
+        /* =========================
+           7. HIỆU ỨNG CHUYỂN ĐỘNG
+        ========================= */
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Tối ưu cho màn hình nhỏ */
+        @media (max-width: 360px) {
+            .card {
+                padding: 20px 15px;
+            }
+
+            .heading h1 {
+                font-size: 20px;
+            }
+
+            .status-box {
+                font-size: 12px;
+            }
+        }
+
+        /* Tôn trọng cài đặt giảm chuyển động của thiết bị */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
 <body>
-<header class="topbar"><a class="brand" href="#"><span class="logo">♡</span> locket<span>gold</span></a><a class="navbtn" href="#packages">Xem các gói ↗</a></header>
-<main>
-<section class="hero"><div class="hero-copy"><span class="eyebrow">✦ TRẢI NGHIỆM LOCKET GOLD</span><h1>Locket của bạn,<br><em>nâng cấp hơn.</em></h1><p>Thêm nhiều cách lưu giữ khoảnh khắc cùng những tính năng tiện lợi dành cho bạn.</p><a class="btn" href="#packages">Khám phá các gói ↓</a><small class="trust">♡ Chọn gói phù hợp · Đặt hàng dễ dàng</small></div><div class="hero-art"><div class="heart heart1">♥</div><div class="photo back"><div class="pic pink">✿</div><span>little moments</span></div><div class="photo front"><div class="pic orange">☀</div><div class="caption"><b>today's memories</b><small>made with love ♡</small></div></div><div class="heart heart2">♡</div></div></section>
-<section class="features section"><span class="eyebrow">NHỮNG ĐIỀU BẠN SẼ THÍCH</span><h2>Thêm nhiều điều <em>đáng yêu</em></h2><p class="sub">Các tính năng được liệt kê trong từng gói bên dưới.</p><div class="feature-grid"><article><i>✦</i><b>Locket Gold</b><small>Trải nghiệm tính năng Gold</small></article><article><i>☼</i><b>Không quảng cáo</b><small>Tập trung vào khoảnh khắc</small></article><article><i>▧</i><b>Ảnh & video</b><small>Thêm cách chia sẻ kỷ niệm</small></article><article><i>♡</i><b>Cá nhân hóa</b><small>Tùy chỉnh theo phong cách bạn</small></article></div></section>
-<section class="packages section" id="packages"><span class="eyebrow">BẢNG GIÁ</span><h2>Chọn gói <em>của bạn</em></h2><p class="sub">Chọn thời hạn phù hợp và xem lại thông tin trước khi gửi yêu cầu.</p><div class="plans">
-<article class="plan"><div class="plan-top"><i>♡</i><small>01 THÁNG</small></div><h3>Gói tháng</h3><p>Dùng thử trong thời gian ngắn</p><div class="price">79.000đ <small>/ gói</small></div><ul><li>Mở khóa Locket Gold</li><li>Không quảng cáo</li><li>Upload ảnh từ thư viện</li><li>Quay video Lockets 60s</li><li>Xem những ai đã xem Lockets của bạn</li><li>Thay đổi icon Locket</li><li>Mở khóa giới hạn bạn bè</li><li>Huy hiệu Locket Gold</li></ul><button class="choose" data-plan="Gói tháng">Chọn gói tháng <span>→</span></button></article>
-<article class="plan popular"><label>ĐƯỢC YÊU THÍCH</label><div class="plan-top"><i>✧</i><small>01 NĂM</small></div><h3>Gói năm</h3><p>Lựa chọn tiết kiệm dài hạn</p><div class="price">139.000đ <small>/ gói</small></div><ul><li>Mở khóa Locket Gold</li><li>Không quảng cáo</li><li>Upload ảnh từ thư viện</li><li>Quay video Lockets 60s</li><li>Xem những ai đã xem Lockets của bạn</li><li>Thay đổi icon Locket</li><li>Mở khóa giới hạn bạn bè</li><li>Huy hiệu Locket Gold</li></ul><button class="choose" data-plan="Gói năm">Chọn gói năm <span>→</span></button></article>
-<article class="plan"><div class="plan-top"><i>✿</i><small>VĨNH VIỄN</small></div><h3>Gói vĩnh viễn</h3><p>Lựa chọn cho nhu cầu dài hạn</p><div class="price">199.000đ <small>/ gói</small></div><ul><li>Mở khóa Locket Gold</li><li>Không quảng cáo</li><li>Upload ảnh từ thư viện</li><li>Quay video Lockets 60s</li><li>Xem những ai đã xem Lockets của bạn</li><li>Thay đổi icon Locket</li><li>Mở khóa giới hạn bạn bè</li><li>Huy hiệu Locket Gold</li></ul><button class="choose" data-plan="Gói vĩnh viễn">Chọn gói vĩnh viễn <span>→</span></button></article>
-</div><p class="note">* Đây là giá mẫu. Hãy xác nhận giá và quyền cung cấp dịch vụ trước khi công khai.</p></section>
-<section class="order-section" id="order"><div class="order-card"><div><span class="eyebrow">BẮT ĐẦU NGAY</span><h2>Đặt gói bạn <em>đã chọn</em></h2><p class="sub left">Điền thông tin liên hệ để tạo yêu cầu đặt hàng. Phiên bản này chưa xử lý thanh toán tự động.</p><div class="privacy"><b>♡ An toàn thông tin</b><small>Không nhập mật khẩu Locket, mã OTP hoặc thông tin đăng nhập.</small></div></div><form id="orderForm"><label for="plan">Gói đã chọn</label><select id="plan" name="plan"><option>Gói tháng</option><option>Gói năm</option><option>Gói vĩnh viễn</option></select><label for="customer">Tên của bạn</label><input id="customer" name="customer" placeholder="Nhập tên" required maxlength="80"><label for="contact">Thông tin liên hệ</label><input id="contact" name="contact" placeholder="Email hoặc số điện thoại" required maxlength="120"><label for="coupon">Mã giảm giá (nếu có)</label><div class="coupon"><input id="coupon" placeholder="Nhập mã giảm giá"><button id="apply" type="button">Áp dụng</button></div><p id="couponMsg" aria-live="polite"></p><div class="total"><span>Tạm tính</span><b id="total">49.000đ</b></div><button class="btn submit" type="submit">Tạo yêu cầu đặt hàng →</button><small class="fine">Bản demo: cần cấu hình email nhận đơn trong script.js.</small></form></div></section>
-<section class="contact-section" id="contact"><span class="eyebrow">KẾT NỐI VỚI CHÚNG MÌNH</span><h2>Liên hệ <em>đặt gói</em></h2><p class="sub">Bạn có thể liên hệ qua các kênh bên dưới để hỏi thêm thông tin.</p><div class="contact-links"><a href="https://zalo.me/0888628744" target="_blank" rel="noopener noreferrer">Zalo: 0888 628 744 ↗</a><a href="https://www.facebook.com/share/19zxRYPQCn/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Facebook ↗</a><a href="https://www.tiktok.com/@_nttug.driven_?_r=1&_t=ZS-9Al3ExWm73V" target="_blank" rel="noopener noreferrer">TikTok ↗</a></div><div class="payment-box"><h3>Quét mã Vietcombank</h3><p>Quét mã QR để xem thông tin chuyển khoản. Vui lòng xác nhận số tiền và người nhận trước khi chuyển.</p><img src="payment-qr.jpeg" alt="Mã QR Vietcombank do chủ website cung cấp"><p><strong>Người nhận:</strong> NGO THANH TUNG</p><p><strong>Nội dung chuyển khoản:</strong> Tên + gói đã chọn</p></div></section>
-<section class="faq section"><span class="eyebrow">CẦN BIẾT</span><h2>Một vài <em>lưu ý</em></h2><details><summary>Đặt hàng có tự động thanh toán không?</summary><p>Chưa. Đây là mẫu giao diện tĩnh. Bạn cần cấu hình phương thức thanh toán và quy trình xác nhận riêng.</p></details><details><summary>Tôi có thể đổi giá và tên gói không?</summary><p>Có. Chỉnh sửa giá trong index.html và các cấu hình tương ứng trong script.js.</p></details><details><summary>Đây có phải trang chính thức của Locket?</summary><p>Không. Đây là website độc lập, không đại diện cho Locket.</p></details></section>
-</main><footer><a class="brand" href="#"><span class="logo">♡</span> locket<span>gold</span></a><p>Website độc lập · Không liên kết hoặc được tài trợ bởi Locket.</p><small>© <span id="year"></span> Locket Gold Demo</small></footer><div id="toast" role="status"></div><script src="script.js"></script></body></html>
+
+    <main class="container">
+
+        <!-- Logo trang trí -->
+        <div class="logo" aria-hidden="true">G</div>
+
+        <!-- Tiêu đề trang -->
+        <header class="heading">
+            <h1>HỆ THỐNG KÍCH HOẠT TỰ ĐỘNG</h1>
+            <p>
+                Vui lòng nhập chính xác thông tin tài khoản
+                để tiếp tục quá trình kích hoạt.
+            </p>
+        </header>
+
+        <!-- Khu vực nhập Username -->
+        <section class="card" id="inputSection">
+
+            <form id="activationForm">
+
+                <label class="field-label" for="username">
+                    Tên tài khoản hoặc Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    class="input-field"
+                    placeholder="Nhập chính xác Username của bạn..."
+                    autocomplete="username"
+                    maxlength="100"
+                    required
+                >
+
+                <button
+                    type="submit"
+                    class="activate-button"
+                    id="activateButton"
+                >
+                    Tiến Hành Kích Hoạt
+                </button>
+
+                <!-- Hiển thị thông báo lỗi khi cần -->
+                <p
+                    class="error-message"
+                    id="errorMessage"
+                    role="alert"
+                    aria-live="polite"
+                ></p>
+
+            </form>
+
+            <p class="secure-note">
+                Vui lòng kiểm tra Username trước khi tiếp tục.
+            </p>
+
+        </section>
+
+        <!-- Khu vực kết quả: mặc định ẩn -->
+        <section
+            class="card result-section"
+            id="resultSection"
+            aria-live="polite"
+        >
+
+            <h2 class="result-title">
+                Thanh Toán Kích Hoạt
+            </h2>
+
+            <!-- Khung hiển thị mã QR -->
+            <div class="qr-box">
+
+                <!--
+                    THAY ĐƯỜNG DẪN ẢNH QR TẠI ĐÂY.
+                    Ví dụ: src="images/qr-thanh-toan.png"
+                    Hoặc dùng URL ảnh QR do Backend trả về.
+                -->
+                <img
+                    id="qrImage"
+                    class="qr-image"
+                    src="THAY_URL_ANH_QR_TAI_DAY"
+                    alt="Mã QR thanh toán"
+                    hidden
+                >
+
+                <p class="qr-placeholder" id="qrPlaceholder">
+                    Mã QR sẽ hiển thị tại đây
+                </p>
+
+            </div>
+
+            <!-- Hướng dẫn thanh toán -->
+            <p class="instruction">
+                Vui lòng quét mã QR trên và chuyển khoản đúng
+                số tiền để hệ thống tự động kích hoạt.
+            </p>
+
+            <!-- Trạng thái chờ thanh toán -->
+            <div class="status-box" id="statusBox">
+                <span class="spinner" aria-hidden="true"></span>
+
+                <span id="statusText">
+                    Trạng thái: Đang chờ thanh toán...
+                </span>
+            </div>
+
+        </section>
+
+        <!-- Chân trang -->
+        <footer class="footer">
+            HỆ THỐNG KÍCH HOẠT TỰ ĐỘNG<br>
+            Vui lòng chỉ thanh toán khi thông tin giao dịch
+            đã được xác nhận.
+        </footer>
+
+    </main>
+
+    <script>
+        /* ==========================================
+           1. CẤU HÌNH BACKEND
+        ========================================== */
+
+        // Thay bằng URL API Backend thực tế của bạn.
+        const BACKEND_URL = "ĐIỀN_URL_BACKEND_Ở_ĐÂY";
+
+
+        /* ==========================================
+           2. LẤY CÁC PHẦN TỬ HTML
+        ========================================== */
+
+        const activationForm = document.getElementById("activationForm");
+        const usernameInput = document.getElementById("username");
+        const activateButton = document.getElementById("activateButton");
+
+        const inputSection = document.getElementById("inputSection");
+        const resultSection = document.getElementById("resultSection");
+
+        const errorMessage = document.getElementById("errorMessage");
+        const qrImage = document.getElementById("qrImage");
+        const qrPlaceholder = document.getElementById("qrPlaceholder");
+        const statusText = document.getElementById("statusText");
+
+
+        /* ==========================================
+           3. HÀM HIỂN THỊ THÔNG BÁO LỖI
+        ========================================== */
+
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.classList.add("visible");
+        }
+
+        function hideError() {
+            errorMessage.textContent = "";
+            errorMessage.classList.remove("visible");
+        }
+
+
+        /* ==========================================
+           4. HÀM HIỂN THỊ MÃ QR
+        ========================================== */
+
+        function displayQRCode(qrUrl) {
+            // Không hiển thị nếu Backend chưa trả URL QR hợp lệ.
+            if (typeof qrUrl !== "string" || !qrUrl.trim()) {
+                qrImage.hidden = true;
+                qrPlaceholder.hidden = false;
+                qrPlaceholder.textContent =
+                    "Chưa có mã QR. Vui lòng kiểm tra cấu hình Backend.";
+                return;
+            }
+
+            // Đặt URL ảnh QR do Backend trả về.
+            qrImage.onload = function () {
+                qrImage.hidden = false;
+                qrPlaceholder.hidden = true;
+            };
+
+            qrImage.onerror = function () {
+                qrImage.hidden = true;
+                qrPlaceholder.hidden = false;
+                qrPlaceholder.textContent =
+                    "Không thể tải mã QR. Vui lòng thử lại sau.";
+            };
+
+            qrImage.src = qrUrl;
+        }
+
+
+        /* ==========================================
+           5. XỬ LÝ KHI NHẤN NÚT KÍCH HOẠT
+        ========================================== */
+
+        activationForm.addEventListener("submit", async function (event) {
+
+            // Ngăn trình duyệt tải lại trang khi gửi form.
+            event.preventDefault();
+
+            hideError();
+
+            // Lấy Username và loại bỏ khoảng trắng đầu/cuối.
+            const username = usernameInput.value.trim();
+
+            // Kiểm tra dữ liệu trước khi gửi.
+            if (!username) {
+                showError("Vui lòng nhập Username của bạn.");
+                usernameInput.focus();
+                return;
+            }
+
+            // Kiểm tra xem URL Backend đã được cấu hình chưa.
+            if (
+                !BACKEND_URL ||
+                BACKEND_URL === "ĐIỀN_URL_BACKEND_Ở_ĐÂY"
+            ) {
+                showError(
+                    "Backend chưa được cấu hình. Vui lòng điền URL Backend."
+                );
+                return;
+            }
+
+            // Khóa nút để tránh gửi nhiều yêu cầu liên tiếp.
+            activateButton.disabled = true;
+            activateButton.textContent = "Đang xử lý...";
+
+            try {
+
+                /* Gửi Username đến Backend dưới dạng JSON */
+                const response = await fetch(BACKEND_URL, {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        username: username
+                    })
+                });
+
+                // Kiểm tra HTTP status.
+                if (!response.ok) {
+                    throw new Error(
+                        "Máy chủ trả về lỗi HTTP " + response.status
+                    );
+                }
+
+                // Đọc dữ liệu JSON Backend trả về.
+                const data = await response.json();
+
+                /*
+                    QUY ƯỚC PHẢN HỒI BACKEND:
+
+                    {
+                        "success": true,
+                        "qrUrl": "https://example.com/qr.png",
+                        "message": "Đang chờ thanh toán"
+                    }
+
+                    Bạn có thể điều chỉnh các trường bên dưới
+                    cho khớp với API Backend thực tế.
+                */
+
+                // Chỉ chuyển sang màn hình kết quả khi Backend
+                // xác nhận yêu cầu đã được tiếp nhận thành công.
+                if (data.success !== true) {
+                    throw new Error(
+                        data.message || "Không thể tạo yêu cầu kích hoạt."
+                    );
+                }
+
+                // Hiển thị mã QR nếu Backend trả về URL.
+                displayQRCode(data.qrUrl);
+
+                // Cập nhật trạng thái nếu Backend có gửi message.
+                statusText.textContent =
+                    "Trạng thái: " +
+                    (data.message || "Đang chờ thanh toán...");
+
+                // Ẩn phần nhập liệu và hiện khu vực kết quả.
+                inputSection.style.display = "none";
+                resultSection.classList.add("visible");
+
+                // Cuộn đến khu vực kết quả trên điện thoại.
+                resultSection.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            } catch (error) {
+
+                /*
+                    Xử lý lỗi mạng, lỗi HTTP hoặc lỗi dữ liệu.
+                    Không ẩn form để người dùng có thể thử lại.
+                */
+
+                console.error("Lỗi kích hoạt:", error);
+
+                showError(
+                    error.message ||
+                    "Không thể kết nối máy chủ. Vui lòng thử lại."
+                );
+
+            } finally {
+
+                // Mở lại nút nếu yêu cầu không thành công.
+                // Nếu thành công, form đã được ẩn.
+                if (inputSection.style.display !== "none") {
+                    activateButton.disabled = false;
+                    activateButton.textContent =
+                        "Tiến Hành Kích Hoạt";
+                }
+
+            }
+
+        });
+    </script>
+
+</body>
+</html>
